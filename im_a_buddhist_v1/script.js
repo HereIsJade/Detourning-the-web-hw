@@ -24,6 +24,7 @@ function populateVoiceList() {
     if(voices[i].default) {
       option.textContent += ' -- DEFAULT';
     }
+    console.log(voices[i].voiceURI);
 
     option.setAttribute('data-lang', voices[i].lang);
     option.setAttribute('data-name', voices[i].name);
@@ -88,7 +89,7 @@ inputForm.onsubmit = function(event) {
   for(let i=0;i<numRepeat;i++){
     text+=inputTxt.value;
   }
-  console.log(text+" typeof: "+typeof(text));
+  //console.log(text+" typeof: "+typeof(text));
   utterThis = new SpeechSynthesisUtterance(text);
 
   utterThis.rate = rate.value;
