@@ -5,6 +5,11 @@ function newData(data){
   console.log('all data recieved',data);
 }
 
+var fs = require('fs');
+var data=fs.readFileSync('words.json');
+var words=JSON.parse(data);
+console.log(words);
+
 var synth = window.speechSynthesis;
 
 var inputForm = document.querySelector('form');
