@@ -5,10 +5,7 @@ function newData(data){
   console.log('all data recieved',data);
 }
 
-var fs = require('fs');
-var data=fs.readFileSync('words.json');
-var words=JSON.parse(data);
-console.log(words);
+var count;
 
 var synth = window.speechSynthesis;
 
@@ -36,7 +33,7 @@ function populateVoiceList() {
     if(voices[i].default) {
       option.textContent += ' -- DEFAULT';
     }
-    console.log(voices[i].voiceURI);
+    //console.log(voices[i].voiceURI);
 
     option.setAttribute('data-lang', voices[i].lang);
     option.setAttribute('data-name', voices[i].name);
@@ -101,18 +98,21 @@ inputForm.onsubmit = function(event) {
   var textMp3='';
   for(let i=0;i<numRepeat;i++){
     text+=inputTxt.value;
-    if(i==10){
+    if(i==5){
       textMp3=text;
     }
   }
-  //console.log(text+" typeof: "+typeof(text));
-  utterThis = new SpeechSynthesisUtterance(text);
 
-  utterThis.rate = rate.value;
+  utterThis = new SpeechSynthesisUtterance(text);
+  var rateVal=rate.value;
+  rateVal=parseFloat(rateVal).toFixed(1);
+  utterThis.rate = rateVal;
+  var lang='';
   var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
   for(i = 0; i < voices.length ; i++) {
     if(voices[i].name === selectedOption) {
       utterThis.voice = voices[i];
+      lang=voices[i].lang;
       break;
     }
   }
@@ -126,19 +126,22 @@ inputForm.onsubmit = function(event) {
   synth.speak(utterThis);
   chooseGif(rate.value);
 
-  var data={
-    text:textMp3,
-    rate:rate.value,
-    voice:utterThis.voice
-  }
+  $.getJSON( "/all").done(function( data ) {
+    count=data.count;
+    console.log("count in onSubmit",count);
 
-  // socket.on('news', function (data) {
-  //   console.log('sending: ');
-  //   // console.log(data);
-  //   socket.emit('my other event', { my: 'data' });
-  // });
-  console.log('sending: ');
-  socket.emit('user data',data);
+    var newUser={
+      id:count,
+      text:textMp3,
+      rate:rateVal,
+      voice:lang
+    }
+    $.getJSON( "/add/"+newUser.id+"/"+newUser.text+"/"+newUser.rate+"/"+newUser.voice).done(function( data ) {
+      console.log("client side new user data:");
+      console.log(data);
+    });
+
+  });
 
 }
 
@@ -147,9 +150,13 @@ inputTxt.blur();
 rate.onchange = function(event) {
   event.preventDefault();
   synth.cancel();
-  console.log("onChange, rate.value="+rate.value);
-  rateValue.textContent = rate.value*100+'%';
-  utterThis.rate = rate.value;
+  // console.log("onChange, rate.value="+rateVal);
+  var rateVal=rate.value;
+  rateVal=parseFloat(rateVal).toFixed(1);
+  utterThis.rate = rateVal;
+  console.log("onChange, rateVal="+rateVal);
+  rateValue.textContent = rateVal*100+'%';
+  // utterThis.rate = rate.value;
   synth.speak(utterThis);
   chooseGif(rate.value);
   // document.getElementById('gifs').src="gif/flung.gif";

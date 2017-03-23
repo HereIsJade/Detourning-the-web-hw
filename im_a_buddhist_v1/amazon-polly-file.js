@@ -1,32 +1,74 @@
-"use strict";
-// Load the SDK
-const AWS = require('aws-sdk')
-const Fs = require('fs')
+function PollyFile(id,newUser){
+  // Load the SDK
+  var AWS = require('aws-sdk')
+  var Fs = require('fs')
+  var voiceEnUS=['Joanna','Salli','Kimberly','Kendra','Ivy','Justin','Joey'];
+  var voiceEsES=['Conchita','Enrique'];
+  var voiceEsUS=['Penélope','Miguel'];
+  var voiceFr=['Céline','Mathieu','Chantal'];
+  var voiceItIT=['Carla','Giorgio'];
+  // Create an Polly client
+  var Polly = new AWS.Polly({
+      signatureVersion: 'v4',
+      region: 'us-east-1'
+  })
+  var voiceId='';
+  this.id=id;
+  this.newUser=newUser;
+  if(this.newUser.voice=='en-US'){
+    voiceId=voiceEnUS[parseInt(Math.random()*7)];
+  }
+  else if(this.newUser.voice=='es-ES'){
+    voiceId=voiceEsES[parseInt(Math.random()*2)];
+  }
+  else if(this.newUser.voice=='es-US'){
+    voiceId=voiceEsUS[parseInt(Math.random()*2)];
+  }
+  else if(this.newUser.voice=='ja-JP'){
+    voiceId='Mizuki';
+  }
+  else if(this.newUser.voice=='it-IT'){
+    console.log('it');
+    voiceId=voiceItIT[parseInt(Math.random()*2)];
+  }
+  else if(this.newUser.voice=='fr-CA'||'fr-FR'){
+    voiceId=voiceFr[parseInt(Math.random()*3)];
+  }
 
-// Create an Polly client
-const Polly = new AWS.Polly({
-    signatureVersion: 'v4',
-    region: 'us-east-1'
-})
-var textstr='i am a buddhist try version 1'
-let params = {
-    'Text': '<speak><prosody rate="2.0">'+textstr+'</prosody></speak>',
-    'OutputFormat': 'mp3',
-    'TextType':'ssml',
-    'VoiceId': 'Kimberly'
-}
+  else{
+    voiceId='Joey';
+  }
 
-Polly.synthesizeSpeech(params, (err, data) => {
-    if (err) {
-        console.log(err.code)
-    } else if (data) {
-        if (data.AudioStream instanceof Buffer) {
-            Fs.writeFile("./ssml.mp3", data.AudioStream, function(err) {
-                if (err) {
-                    return console.log(err)
-                }
-                console.log("The file was saved!")
-            })
-        }
+
+  var params={};//if bug, try this. later
+
+  this.generateParams=function(){
+    params={
+      'Text': '<speak><prosody rate="'+this.newUser.rate+'">'+this.newUser.text+'</prosody></speak>',
+      'OutputFormat': 'mp3',
+      'TextType':'ssml',
+      'VoiceId':voiceId
+      // 'LanguageCode':this.newUser.voice
     }
-})
+  }
+
+  this.generateFile=function(){
+    console.log("entered generateFile");
+    Polly.synthesizeSpeech(params, (err, data) => {
+      console.log("params",params);
+        if (err) {
+            console.log(err.code)
+        } else if (data) {
+            if (data.AudioStream instanceof Buffer) {
+                Fs.writeFile("sound/"+this.id+".mp3", data.AudioStream, function(err) {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    console.log("The file was saved!")
+                })
+            }
+        }
+    })
+  }
+}
+module.exports=PollyFile;
