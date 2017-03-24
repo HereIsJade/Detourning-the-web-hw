@@ -1,5 +1,5 @@
 var socket;
-socket= io.connect('http://192.168.1.187:3002');
+socket= io.connect('http://localhost:3002');
 socket.on('user data',newData);
 function newData(data){
   console.log('all data recieved',data);
@@ -21,6 +21,8 @@ var numRepeat=30;
 var text='';
 var utterThis;
 var gif;
+
+var trulyEnd=true;
 
 function populateVoiceList() {
   voices = synth.getVoices();
@@ -121,7 +123,14 @@ inputForm.onsubmit = function(event) {
             console.log('Speaker started');
           };
   utterThis.onend = function() {
-            console.log('Speaker ended');
+    if(trulyEnd){
+      console.log('Speaker ended');
+      location.replace("../withThreejs/helloWorld.html");
+    }
+    else{
+      console.log('Speaker ended due to changes');
+      trulyEnd=true;
+    }
           };
   synth.speak(utterThis);
   chooseGif(rate.value);
@@ -148,6 +157,7 @@ inputForm.onsubmit = function(event) {
 inputTxt.blur();
 
 rate.onchange = function(event) {
+  trulyEnd=false;
   event.preventDefault();
   synth.cancel();
   // console.log("onChange, rate.value="+rateVal);

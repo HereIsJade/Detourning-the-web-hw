@@ -1,26 +1,41 @@
+var socket;
+socket= io.connect('http://localhost:3002');
+socket.on('user data',newData);
+function newData(data){
+  console.log('all data recieved in animation js',data);
+}
+
+var count=5;
+
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
+var sounds=[];
 var container, stats;
 var camera, scene, renderer, particles, geometry, materials = [], parameters, i, h, color, sprite, size;
+var sprites=[];
 var mouseX = 0, mouseY = 0;
 var listener;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+var clock = new THREE.Clock();
+var analyser1, analyser2, analyser3;
+var colors=[[1.0, 0.2, 0.5],[0.95, 0.1, 0.5],[0.90, 0.05, 0.5],[0.85, 0, 0.5],[0.80, 0, 0.5]];
+var sizes=[50,15,10,8,5];
+var audioLoader;
+var textures=["textures/oil drop.png","textures/light_1.png"];
 
-// var listener = new THREE.AudioListener();
-// camera.add( listener );
-// var sound = new THREE.PositionalAudio( listener );
-// var audioLoader = new THREE.AudioLoader();
-// audioLoader.load( 'sounds/song.ogg', function( buffer ) {
-// 	sound1.setBuffer( buffer );
-// 	sound1.setRefDistance( 80 );
-// 	sound1.play();
-// });
+$.getJSON( "/all").done(function( data ) {
+  count=data.count;
+  console.log("count in animation js",count);
+  init();
+  animate();
+});
 
-init();
-animate();
+// init();
+// animate();
 
 function init() {
+  console.log("init");
 
   container = document.createElement( 'div' );
   document.body.appendChild( container );
@@ -28,46 +43,28 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 2000 );
   camera.position.z = 500;
   //Create an AudioListener and add it to the camera
-listener = new THREE.AudioListener();
-camera.add( listener );
+  listener = new THREE.AudioListener();
+  //camera.add( listener );
 
-//Create the PositionalAudio object (passing in the listener)
-var sound1 = new THREE.PositionalAudio( listener );
-var sound2 = new THREE.PositionalAudio( listener );
-var sound3 = new THREE.PositionalAudio( listener );
-var sound4 = new THREE.PositionalAudio( listener );
-var sound5 = new THREE.PositionalAudio( listener );
-//Load a sound and set it as the PositionalAudio object's buffer
-var audioLoader = new THREE.AudioLoader();
-audioLoader.load( 'sounds/1.mp3', function( buffer ) {
-	sound1.setBuffer( buffer );
-	sound1.setRefDistance( 20 );
-	sound1.play();
-});
+  //Load a sound and set it as the PositionalAudio object's buffer
+  audioLoader = new THREE.AudioLoader();
 
-audioLoader.load( 'sounds/2.mp3', function( buffer ) {
-	sound2.setBuffer( buffer );
-	sound2.setRefDistance( 20 );
-	sound2.play();
-});
 
-audioLoader.load( 'sounds/3.mp3', function( buffer ) {
-	sound3.setBuffer( buffer );
-	sound3.setRefDistance( 20 );
-	sound3.play();
-});
+  function createSound(filename) {
+      var sound = new THREE.PositionalAudio(listener);
+      audioLoader.load('sound/' + filename + '.mp3', function(buffer) {
+          sound.setBuffer(buffer);
+          sound.setRefDistance(20);
+          sound.setLoop(true);
+          sound.play();
+      });
+      return sound;
+  }
 
-audioLoader.load( 'sounds/4.mp3', function( buffer ) {
-	sound4.setBuffer( buffer );
-	sound4.setRefDistance( 20 );
-	sound4.play();
-});
 
-audioLoader.load( 'sounds/5.mp3', function( buffer ) {
-	sound5.setBuffer( buffer );
-	sound5.setRefDistance( 20 );
-	sound5.play();
-});
+  for (var m=0;m<count;m++){
+    camera.add(createSound(m));
+  }
 
   scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2( 0x000000, 0.0008 );
@@ -76,19 +73,12 @@ audioLoader.load( 'sounds/5.mp3', function( buffer ) {
   var textureLoader = new THREE.TextureLoader();
   textureLoader.crossOrigin = '';
 
-  sprite1 = textureLoader.load( "textures/smoke1.png" );
-  sprite2 = textureLoader.load( "textures/oil drop.png" );
-  sprite3 = textureLoader.load( "textures/light_1.png" );
-  sprite4 = textureLoader.load( "textures/drop.png" );
-  sprite5 = textureLoader.load( "textures/smoke_2.png" );
+  for (var i=0;i<count;i++){
+    sprites[i]=textureLoader.load(textures[parseInt(Math.random()*textures.length)]);
+    console.log(sprites[i]);
+  }
 
-  // sprite1 = textureLoader.load( "textures/snowflake1.png" );
-  // sprite2 = textureLoader.load( "textures/snowflake2.png" );
-  // sprite3 = textureLoader.load( "textures/snowflake3.png" );
-  // sprite4 = textureLoader.load( "textures/snowflake4.png" );
-  // sprite5 = textureLoader.load( "textures/snowflake5.png" );
-
-  for ( i = 0; i < 10; i ++ ) {
+  for ( i = 0; i < 3; i ++ ) {
 
     var vertex = new THREE.Vector3();
 
@@ -103,16 +93,12 @@ audioLoader.load( 'sounds/5.mp3', function( buffer ) {
     geometry.vertices.push( vertex );
 
   }
+  parameters=[];
+  for (var i=0;i<count;i++){
+    parameters.push([colors[parseInt(Math.random()*5)],sprites[i],sizes[parseInt(Math.random()*5)],sounds[i]]);
+  }
 
-  parameters = [
-    [ [1.0, 0.2, 0.5], sprite2, 50 ,sound2],
-    [ [0.95, 0.1, 0.5], sprite3, 15,sound3 ],
-    [ [0.90, 0.05, 0.5], sprite1, 10 ,sound1],
-    [ [0.85, 0, 0.5], sprite5, 8 ,sound5],
-    [ [0.80, 0, 0.5], sprite4, 5 ,sound4]
-  ];
-
-  for ( i = 0; i < parameters.length; i ++ ) {
+  for ( i = 0; i < count; i ++ ) {
 
     color  = parameters[i][0];
     sprite = parameters[i][1];
@@ -132,10 +118,23 @@ audioLoader.load( 'sounds/5.mp3', function( buffer ) {
 
   }
 
+  // analyser1 = new THREE.AudioAnalyser( sound1, 32 );
+  // analyser2 = new THREE.AudioAnalyser( sound2, 32 );
+  // analyser3 = new THREE.AudioAnalyser( sound3, 32 );
+
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );
+
+  controls = new THREE.FirstPersonControls( camera, renderer.domElement );
+
+  controls.movementSpeed = 200;
+  controls.lookSpeed = 0.05;
+  controls.noFly = true;
+  controls.lookVertical = false;
+
+  window.addEventListener( 'resize', onWindowResize, false );
 
   stats = new Stats();
   container.appendChild( stats.dom );
@@ -208,10 +207,14 @@ function animate() {
 
 function render() {
 
+  var delta = clock.getDelta();
+
+  controls.update( delta );
+
   var time = Date.now() * 0.00005;
 
-  camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-  camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+  //camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+  //camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
   camera.lookAt( scene.position );
 

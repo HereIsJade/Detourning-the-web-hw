@@ -15,84 +15,84 @@
     "voice": "ja-JP"
   },
   "3": {
-    "text": "私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい 私は金持ちになりたい ",
-    "rate": 1.5,
-    "voice": "en-US"
-  },
-  "4": {
-    "text": "私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  私は金持ちになりたい  ",
-    "rate": 1.5,
-    "voice": "ja-JP"
-  },
-  "5": {
-    "text": "私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい ",
-    "rate": 2,
-    "voice": "ja-JP"
-  },
-  "6": {
-    "text": "こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです こんにちは、ミズキです ",
-    "rate": 1.6,
-    "voice": "ja-JP"
-  },
-  "7": {
-    "text": "私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい 私は美しくなりたい ",
-    "rate": 1.6,
-    "voice": "ja-JP"
-  },
-  "8": {
     "text": "Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa ",
     "rate": 1.8,
     "voice": "es-ES"
   },
-  "9": {
+  "4": {
     "text": "test here test here test here test here test here test here test here test here test here test here test here ",
     "rate": 1.8,
     "voice": "en-US"
   },
-  "10": {
+  "5": {
     "text": "Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa Quiero ser hermosa ",
     "rate": 1.4,
     "voice": "es-ES"
   },
-  "11": {
+  "6": {
     "text": "My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer My devout believer ",
     "rate": 1,
     "voice": "en-US"
   },
-  "12": {
+  "7": {
     "text": "I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me I hope Allison won't fail me ",
     "rate": 0.9,
     "voice": "en-US"
   },
-  "13": {
+  "8": {
     "text": "Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez ",
     "rate": 0.9,
     "voice": "es-ES"
   },
-  "14": {
-    "text": "Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez Por favor tenga éxito esta vez ",
-    "rate": 1,
-    "voice": "es-ES"
-  },
-  "15": {
+  "9": {
     "text": "Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta Si prega di avere successo questa volta ",
     "rate": 1,
     "voice": "it-IT"
   },
+  "10": {
+    "text": "Quiero doblar Lucie Quiero doblar Lucie Quiero doblar Lucie Quiero doblar Lucie Quiero doblar Lucie Quiero doblar Lucie ",
+    "rate": 0.9,
+    "voice": "es-US"
+  },
+  "11": {
+    "text": "I hope this code works I hope this code works I hope this code works I hope this code works I hope this code works I hope this code works ",
+    "rate": 1.3,
+    "voice": "en-US"
+  },
+  "12": {
+    "text": "sca acsasc sca acsasc sca acsasc sca acsasc sca acsasc sca acsasc ",
+    "rate": 1,
+    "voice": "en-US"
+  },
+  "13": {
+    "text": "believer, make a wish believer, make a wish believer, make a wish believer, make a wish believer, make a wish believer, make a wish ",
+    "rate": 1,
+    "voice": "en-US"
+  },
+  "14": {
+    "text": "A Buddhist A Buddhist A Buddhist A Buddhist A Buddhist A Buddhist ",
+    "rate": 1,
+    "voice": "en-US"
+  },
+  "15": {
+    "text": "make a wish make a wish make a wish make a wish make a wish make a wish ",
+    "rate": 1,
+    "voice": "en-US"
+  },
   "16": {
-    "text": "Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui ",
-    "rate": 1.4,
-    "voice": "it-IT"
+    "text": "nkln nkln nkln nkln nkln nkln ",
+    "rate": 1,
+    "voice": "en-US"
   },
   "17": {
-    "text": "Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui Leggerò qualsiasi testo che digiterai qui ",
+    "text": "I wish it would work I wish it would work I wish it would work I wish it would work I wish it would work I wish it would work ",
     "rate": 1,
-    "voice": "it-IT"
+    "voice": "en-US"
   },
   "18": {
-    "text": "Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  Leggerò qualsiasi testo che digiterai qui  ",
-    "rate": 1,
-    "voice": "it-IT"
+    "text": "I wish today's demo would work I wish today's demo would work I wish today's demo would work I wish today's demo would work I wish today's demo would work I wish today's demo would work ",
+    "rate": 0.8,
+    "voice": "en-US"
   },
   "count": 19
 }

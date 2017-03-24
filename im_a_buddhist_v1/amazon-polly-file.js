@@ -2,6 +2,7 @@ function PollyFile(id,newUser){
   // Load the SDK
   var AWS = require('aws-sdk')
   var Fs = require('fs')
+  var rstream = Fs.createReadStream('defaultAudio.mp3');
   var voiceEnUS=['Joanna','Salli','Kimberly','Kendra','Ivy','Justin','Joey'];
   var voiceEsES=['Conchita','Enrique'];
   var voiceEsUS=['Penélope','Miguel'];
@@ -57,12 +58,14 @@ function PollyFile(id,newUser){
     Polly.synthesizeSpeech(params, (err, data) => {
       console.log("params",params);
         if (err) {
-            console.log(err.code)
+          console.log("err in synthesizeSpeech");
+            console.log(err.code);
         } else if (data) {
             if (data.AudioStream instanceof Buffer) {
-                Fs.writeFile("sound/"+this.id+".mp3", data.AudioStream, function(err) {
+                Fs.writeFile("public/withThreejs/sound/"+this.id+".mp3", data.AudioStream, function(err) {
                     if (err) {
-                        return console.log(err)
+                      var wstream = Fs.createWriteStream("public/withThreejs/sound/"+this.id+".mp3");
+                      console.log("saved default");
                     }
                     console.log("The file was saved!")
                 })
