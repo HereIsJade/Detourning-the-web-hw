@@ -94,5 +94,10 @@
     "rate": 0.8,
     "voice": "en-US"
   },
-  "count": 19
+  "19": {
+    "text": "six packs six packs six packs six packs six packs six packs ",
+    "rate": 1,
+    "voice": "en-US"
+  },
+  "count": 20
 }
